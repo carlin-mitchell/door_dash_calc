@@ -10,3 +10,21 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(express.static('public'));
+
+
+
+//################################################# route: / #################################################
+app.get('/', (req, res) =>{
+    res.render('home');
+});
+
+
+
+
+
+
+
+const localPort = 3000;
+app.listen(localPort, () => {
+    console.log('App is running on port ' + localPort);
+})
