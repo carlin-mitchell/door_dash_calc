@@ -18,14 +18,56 @@
 
     <!--------- Page content --------->
     <div class="content container">
-            <div class="form-container container">
-                <div class="this-dash form-section">
+        <div class="form-container container">
+            <h1>This Dash</h1>
+            <form action="/calculate" method="post">
 
+                <!-- Variables from this dash -->
+                <div class="this-dash form-section">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Total miles" name='thisDashMiles'>
+                        <span class="input-group-text">miles</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Total hours" name='thisDashHours'>
+                        <span class="input-group-text">hours</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Total minutes" name='thisDashMinutes'>
+                        <span class="input-group-text">minutes</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="Total dollars" name='thisDashDollars'>
+                    </div>
                 </div>
-                <div class="constants form-section">
-    
+                <div class="form-buttons mb-3">
+                    <a class="collapse-link" data-bs-toggle="collapse" href="#constants-container" role="button"
+                        aria-expanded="false" aria-controls="constants-container">
+                        Edit Constants</a>
+                    <button type="submit" class= "btn btn-primary">Calculate</button>
                 </div>
-            </div>
+                <!---- Constants variables ----->
+
+                <div class="constants form-section collapse" id="constants-container">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Miles per gallon" name='constCarMPG' value='23'>
+                        <span class="input-group-text">mpg</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="Fuel cost" name='constFuelCost' value='2.89'>
+                        <span class="input-group-text">per mile</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="Maintenance cost"
+                            name='constMaintenanceCost' value='0.09'>
+                        <span class="input-group-text">per mile</span>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!------------ Footer ------------>

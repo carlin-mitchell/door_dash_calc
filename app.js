@@ -20,8 +20,18 @@ app.get('/', (req, res) =>{
 
 
 
-//############################################# route: /Calculate #############################################
-
+//############################################# route: /calculate #############################################
+app.post('/calculate', (req, res) =>{
+    const miles = req.body.thisDashMiles;
+    const hours = req.body.thisDashHours;
+    const minutes = req.body.thisDashMinutes;
+    const dollars = req.body.thisDashDollars;
+    const mpg = req.body.constCarMPG;
+    const fuelCost = req.body.constFuelCost;
+    const maintenanceCost = req.body.constMaintenanceCost;
+    console.log(miles,hours, minutes, dollars, mpg, fuelCost, maintenanceCost);
+    res.redirect('/');
+});
 
 
 
