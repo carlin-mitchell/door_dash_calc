@@ -31,13 +31,21 @@ body {
     align-items: center;
 }
 
-.collapse-link {
+.results{ 
+    text-align: center;
+}
 
+.results > p, h2 {
+    display: inline-block;
 }
 
 .footer {
     flex-shrink: 0;
     
+}
+
+.col {
+    height: 50px;
 }
 
 .footer-icon{
