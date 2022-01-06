@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const _ = require('lodash');
 const mongoose = require('mongoose');
+const res = require('express/lib/response');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -15,7 +16,9 @@ app.use(express.static('public'));
 
 //################################################# route: / #################################################
 app.get('/', (req, res) =>{
-    res.render('home');
+    res.render('home', {
+        resultsClass: 'hidden'
+    });
 });
 
 
@@ -29,9 +32,13 @@ app.post('/calculate', (req, res) =>{
     const mpg = req.body.constCarMPG;
     const fuelCost = req.body.constFuelCost;
     const maintenanceCost = req.body.constMaintenanceCost;
-    console.log(miles,hours, minutes, dollars, mpg, fuelCost, maintenanceCost);
-    res.redirect('/');
+    // console.log(miles,hours, minutes, dollars, mpg, fuelCost, maintenanceCost);
+    res.render('home', {
+        resultsClass: '',
+    }
+    )
 });
+
 
 
 
