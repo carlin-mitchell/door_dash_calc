@@ -6,6 +6,8 @@
  * @returns {Number} number rounded to specified places
  */
 
+const { round } = require("lodash");
+
 const roundToPlace = (num, places) => {
     multiplier = Math.pow(10, places);
     return Math.round(num * multiplier) / multiplier;
@@ -46,17 +48,22 @@ const calculateGrossPay = (hours, dollars) => {
  * @param {Number} gasPrice 
  * @param {Number} mpg miles per gallon
  * @param {Number} milesDriven 
- * @returns {Number} gas cost, rounded to two decimal places
+ * @returns {Number} total gas cost, rounded to two decimal places
  */
 const calculateGasCost = (gasPrice, mpg, milesDriven) => {
     const gasCostPerMile = gasPrice / mpg;
-    return roundToPlace(gasCostPerMile * milesDrive, 2);
+    return roundToPlace(gasCostPerMile * milesDriven, 2);
 }
 // TEST: console.log(calculateGasCost(2.79, 20, 30.06));
 
 
 //############################################# calculateMaintenanceCost ##############################################
-
+/**
+ * 
+ * @param {Number} mntCostPerMile 
+ * @param {number} milesDriven 
+ * @returns {Number} total maintenance cost
+ */
  const calculateMaintenanceCost = (mntCostPerMile, milesDriven) => {
     return roundToPlace(mntCostPerMile * milesDriven, 2)
 }
@@ -76,3 +83,29 @@ const calculateGasCost = (gasPrice, mpg, milesDriven) => {
     
 }
 //TEST: console.log(calculateHourlyProfit(60, 4.63));
+
+exports.getCalculatedStrings = (milesDriven, hours, minutes, grossDollars, mpg, gasPrice, maintenanceCost) => {
+    const totalHours =  calculateRoundedHours(hours, minutes);
+    
+    const totalGasCost = calculateGasCost(gasPrice, mpg, milesDriven);
+    const totalMaintenanceCost = calculateMaintenanceCost(maintenanceCost, milesDriven);
+    const totalCost = totalGasCost + totalMaintenanceCost;
+
+
+    const totalProfit = grossDollars - totalCost;
+    const hourlyProfit = calculateHourlyProfit(totalProfit, totalHours);
+
+    const formatter = Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    });
+
+    return {
+        totalGasCost: totalGasCost.toFixed(2),
+        totalMaintenanceCost: totalMaintenanceCost.toFixed(2),
+        totalCost: totalCost.toFixed(2),
+        grossIncome: grossDollars.toFixed(2),
+        totalProfit: totalProfit.toFixed(2),
+        hourlyProfit: hourlyProfit.toFixed(2),
+    }
+}

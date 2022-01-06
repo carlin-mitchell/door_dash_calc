@@ -5,6 +5,8 @@ const _ = require('lodash');
 const mongoose = require('mongoose');
 const res = require('express/lib/response');
 
+const calculations = require('./local_modules/calculations.js')
+
 const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
@@ -17,7 +19,13 @@ app.use(express.static('public'));
 //################################################# route: / #################################################
 app.get('/', (req, res) =>{
     res.render('home', {
-        resultsClass: 'hidden'
+        resultsClass: 'hidden',
+        totalGasCost: '',
+        totalMaintenanceCost: '',
+        grossIncome: '',
+        totalCost: '', 
+        totalProfit: '', 
+        hourlyProfit: ''
     });
 });
 
@@ -25,18 +33,29 @@ app.get('/', (req, res) =>{
 
 //############################################# route: /calculate #############################################
 app.post('/calculate', (req, res) =>{
-    const miles = req.body.thisDashMiles;
-    const hours = req.body.thisDashHours;
-    const minutes = req.body.thisDashMinutes;
-    const dollars = req.body.thisDashDollars;
-    const mpg = req.body.constCarMPG;
-    const fuelCost = req.body.constFuelCost;
-    const maintenanceCost = req.body.constMaintenanceCost;
-    // console.log(miles,hours, minutes, dollars, mpg, fuelCost, maintenanceCost);
+    const miles = parseFloat(req.body.thisDashMiles);
+    const hours = parseFloat(req.body.thisDashHours);
+    const minutes = parseFloat(req.body.thisDashMinutes);
+    const dollars = parseFloat(req.body.thisDashDollars);
+    const mpg = parseFloat(req.body.constCarMPG);
+    const fuelCost = parseFloat(req.body.constFuelCost);
+    const maintenanceCost = parseFloat(req.body.constMaintenanceCost);
+    
+    const calculated = calculations.getCalculatedStrings(
+        miles, hours, minutes, dollars, mpg, fuelCost, maintenanceCost
+        );
+    const {totalGasCost, totalMaintenanceCost, totalCost, totalProfit, hourlyProfit, grossIncome} = calculated;
+    console.log(calculated);
     res.render('home', {
         resultsClass: '',
+        totalGasCost: totalGasCost,
+        totalMaintenanceCost: totalMaintenanceCost,
+        grossIncome: grossIncome,
+        totalCost: totalCost, 
+        totalProfit: totalProfit, 
+        hourlyProfit: hourlyProfit
     }
-    )
+    );
 });
 
 

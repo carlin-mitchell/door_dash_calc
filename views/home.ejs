@@ -53,12 +53,12 @@
 
                 <div class="constants form-section collapse" id="constants-container">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Miles per gallon" name='constCarMPG' value='23'>
+                        <input type="text" class="form-control" placeholder="Miles per gallon" name='constCarMPG' value='20'>
                         <span class="input-group-text">mpg</span>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="Fuel cost" name='constFuelCost' value='2.89'>
+                        <input type="text" class="form-control" placeholder="Fuel cost" name='constFuelCost' value='2.79'>
                         <span class="input-group-text">per gallon</span>
                     </div>
                     <div class="input-group mb-3">
@@ -69,27 +69,28 @@
                     </div>
                 </div>
             </form>
+            <!-- Results -->
             <div class="results <%= resultsClass %>">
                 <div class="hourly-pay">
                     <h3>You Made:</h3>
-                    <h2>$$$/hr</h2>
-                    <p>during this dash</p>
+                    <h2>$<%= hourlyProfit %>/hr</h2>
+                    <p> in profit during this dash</p>
                 </div>
                 <div class="dash-stats container">
                     <div class="row">
                         <div class="col col-4 mb-1 pt-3">
                             <h4>Income</h4>
-                            <p><strong>Total: xxx</strong></p>
+                            <p><strong>Total: <%= grossIncome %> </strong></p>
                         </div>
                         <div class="col col-4 mb-1 pt-3">
                             <h4>Costs</h4>
-                            <p>Gas: xxx</p>
-                            <p>Mnt.: xxx</p>
-                            <p><strong>Total: xxx</strong></p>
+                            <p>Gas: $<%= totalGasCost %> </p>
+                            <p>Mnt.: $<%= totalMaintenanceCost %> </p>
+                            <p><strong>Total: $<%= totalCost %> </strong></p>
                         </div>
                         <div class="col bottom-col col-4 mb-1 pt-3">
                             <h4>Profit</h4>
-                            <p><strong>Total: xxx</strong></p>
+                            <p><strong>Total: $<%= totalProfit %> </strong></p>
                         </div>
                     </div>
                     </div>
